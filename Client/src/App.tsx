@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState } from "react";
 import Home from "./Pages/Home";
 import Layout from "./Components/Layout/Layout";
 import Signin from "./Pages/Auth/Signin";
@@ -16,49 +15,31 @@ import Settings from "../AdminPanel/Pages/Settings";
 import EntireCart from "./Components/EntireCart";
 import ProtectedRoute from "./Pages/Auth/ProtectedRoute"
 import Credentials from "./Pages/Auth/Credentials";
+import Profile from "./Pages/Profile";
 import Otp from "./Pages/Auth/Otp";
-import type { Product } from "./Types/Product"
  
+  
 const App = () => {
-  const [cartCount, setCartCount] = useState(0);
-  const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [searchItem, setSearchItem] = useState("");
+ 
 
   return (
     <Router>
       <Routes>
-         <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route 
-              path="/" 
-              element={
-                <Home 
-                  cartCount={cartCount}
-                  setCartCount={setCartCount}
-                  cartItems={cartItems}
-                  setCartItems={setCartItems}
-                  searchItem={searchItem}
-                  setSearchItem={setSearchItem}
-                />
-              } 
-            />
+        <Route element={<ProtectedRoute />}>
+ <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/entirecart" element={<EntireCart />} />
           </Route>
-          <Route 
-            path="/entirecart" 
-            element={
-              <EntireCart 
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-              />
-            } 
-          />
+            
+           
         </Route>
 
         <Route path="/credentials" element={<Credentials />} />          
         <Route path="/login" element={<Signin />} />
         <Route path="/otp" element={<Otp />} />
 
-         <Route path="/admin" element={<AdminAuth />} />
+        <Route path="/admin" element={<AdminAuth />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<MiniDashboard />} />
           <Route path="messages" element={<Messages />} />
@@ -76,3 +57,4 @@ const App = () => {
 };
 
 export default App;
+
