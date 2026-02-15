@@ -61,8 +61,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-gray-700 flex flex-col justify-center items-center p-3 mt-4">
-        <p className="text-gray-300">ARNOLD SELLERS | MALL</p>
-        <span className="text-gray-300">Copyright 2025, All rights reserved.</span>
+        <p className="text-gray-300">Arnold Sellers| MALL</p>
+        <span className="text-gray-300">Copyright 2026, All rights reserved.</span>
       </div>
     </div>
   )

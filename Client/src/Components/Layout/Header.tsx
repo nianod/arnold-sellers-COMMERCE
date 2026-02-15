@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { FaSearch, FaUser, FaCartPlus, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SideCart from "../SideCart";
-import Home from "../../Pages/Home";
 import type { Product } from "../../Types/Product";
 import Logout from "../Logout";
 import axios from "axios";
 import type { User } from "../../Types/User";
-
+import ProfileStat from "../ProfileStat";
+import { ChevronDown, ChevronUp } from "lucide-react"
+ 
+ 
 const Header = () => {
   const [search, setSearch] = useState<string>("");
   const [openCart, setOpenCart] = useState<boolean>(false);
@@ -18,6 +20,7 @@ const Header = () => {
   const [leave, setLeave] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState<boolean>(true);
+  const [showInfo, setShowInfo] = useState<boolean>(false)
 
   const token = localStorage.getItem("token");
 
@@ -52,9 +55,7 @@ const Header = () => {
     fetchCurrentUser();
   }, []);
 
-  const pend = () => {
-    alert('This feature is currently under development. Stay tuned for updates!');
-  }
+  
   const headerStuff = {
     logo: "/download.jpg",
     title: "ARNOLD-SELLERS",
@@ -99,7 +100,6 @@ const Header = () => {
           </button>
         </div>
 
-      
         <div className="hidden md:flex items-center gap-7">
           <button
             className="ml-4 relative cursor-pointer text-white text-2xl"
@@ -111,8 +111,11 @@ const Header = () => {
             </span>
           </button>
 
-          <button className="bg-[#22201b]  cursor-pointer p-2 rounded hover:bg-[#292326]" onClick={pend}>
-            <p className="text-white flex gap-2 items-center">
+          <button
+            className="bg-[#22201b] flex items-center cursor-pointer p-2 rounded hover:bg-[#292326]"
+            onClick={() => setShowInfo(!showInfo)}
+          >
+            <p className="text-white text-sm flex gap-2 items-center">
               <span className="bg-amber-600 rounded-full p-1">
                 <FaUser />
               </span>
@@ -124,6 +127,11 @@ const Header = () => {
                 "Guest"
               )}
             </p>
+            {showInfo ? (
+              <ChevronUp className="text-white" size={15} />
+            ) : (
+              <ChevronDown className="text-white text-sm" size={15}/>
+            )}
           </button>
         </div>
 
@@ -138,14 +146,20 @@ const Header = () => {
             </span>
           </button>
 
-          <button className="text-white text-xl bg-[#22201b] cursor-pointer p-2 rounded hover:bg-[#3c3a3b]" onClick={pend}>
+          <button
+            className="text-white text-xl bg-[#22201b] cursor-pointer p-2 rounded hover:bg-[#3c3a3b]"
+            onClick={() => setShowInfo(true)}
+          >
             {loadingUser ? (
               <span className="text-sm animate-pulse">...</span>
             ) : user?.firstName ? (
-
-              <p className="font-semibold text-sm flex gap-2"><span className="bg-amber-600 rounded-full p-1"><FaUser /></span>{user.firstName}</p>
+              <p className="font-semibold text-sm flex gap-2">
+                <span className="bg-amber-600 rounded-full p-1">
+                  <FaUser />
+                </span>
+                {user.firstName}
+              </p>
             ) : (
-            
               <span className="font-semibold text-sm">ARNOLD-SELLERS</span>
             )}
           </button>
@@ -197,14 +211,9 @@ const Header = () => {
       />
       <Logout leave={leave} setLeave={setLeave} />
 
-      <Home
-        cartCount={cartCount}
-        setCartCount={SetCartCount}
-        searchItem={searchItem}
-        setSearchItem={setSearchItem}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-      />
+    
+      <ProfileStat showInfo={showInfo} setShowInfo={setShowInfo} />
+       
     </>
   );
 };

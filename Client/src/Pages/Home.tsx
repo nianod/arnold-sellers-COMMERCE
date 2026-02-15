@@ -1,3 +1,4 @@
+//Client/src/Pages/Home.tsx
 import { useState, useEffect } from "react"
 import axios from "axios"
 import type { Product } from "../Types/Product"
@@ -24,7 +25,7 @@ const Home: React.FC<CartCountProps> = ({ setCartCount, searchItem, setCartItems
       const apiUrl = import.meta.env.VITE_HEROKU_URL
       const response = await axios.get<Product[]>(`${apiUrl}/api/products`)
       setProducts(response.data)
-      console.log(response.data)
+      //console.log(response.data)
     } catch (error) {
       console.error("error occurred", error) 
     }
