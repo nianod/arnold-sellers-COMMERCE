@@ -51,6 +51,14 @@ const ProfileStat: React.FC<ProfileProps> = ({ showInfo, setShowInfo }) => {
       localStorage.removeItem('token')
       window.location.href = '/login'
     }
+
+if (loadingUser) {
+    return (
+      <div className="min-h-screen bg-[black] flex items-center justify-center">
+        <p className="text-white text-xl">Loading...</p>
+      </div>
+    );
+  }
   return (
     <>
       {showInfo && (

@@ -13,9 +13,9 @@ import { ChevronDown, ChevronUp } from "lucide-react"
 const Header = () => {
   const [search, setSearch] = useState<string>("");
   const [openCart, setOpenCart] = useState<boolean>(false);
-  const [cartCount, SetCartCount] = useState<number>(0);
+  const [cartCount] = useState<number>(0);
   const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [searchItem, setSearchItem] = useState<string>("");
+  // const [searchItem, setSearchItem] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [leave, setLeave] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
