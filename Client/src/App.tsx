@@ -12,27 +12,25 @@ import Messages from "../AdminPanel/Pages/Messages";
 import MiniDashboard from "../AdminPanel/Pages/MiniDashboard";
 import ManageAccount from "../AdminPanel/Pages/ManageAccount";
 import Settings from "../AdminPanel/Pages/Settings";
-import EntireCart from "./Components/EntireCart";
 import ProtectedRoute from "./Pages/Auth/ProtectedRoute"
 import Credentials from "./Pages/Auth/Credentials";
 import Profile from "./Pages/Profile";
 import Otp from "./Pages/Auth/Otp";
+import { CartProvider } from "./CartContext";
  
   
 const App = () => {
- 
 
   return (
+    <CartProvider>
     <Router>
       <Routes>
-        <Route element={<ProtectedRoute />}>
- <Route element={<Layout />}>
+       <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/entirecart" element={<EntireCart />} />
+             
           </Route>
-            
-           
         </Route>
 
         <Route path="/credentials" element={<Credentials />} />          
@@ -53,6 +51,7 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
+    </CartProvider>
   );
 };
 

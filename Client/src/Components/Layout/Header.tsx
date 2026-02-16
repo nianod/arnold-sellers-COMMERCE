@@ -2,25 +2,24 @@ import { useState, useEffect } from "react";
 import { FaSearch, FaUser, FaCartPlus, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SideCart from "../SideCart";
-import type { Product } from "../../Types/Product";
 import Logout from "../Logout";
 import axios from "axios";
 import type { User } from "../../Types/User";
 import ProfileStat from "../ProfileStat";
-import { ChevronDown, ChevronUp } from "lucide-react"
- 
- 
+import { ChevronDown, ChevronUp } from "lucide-react";
+
+import { useCart } from "../../CartContext";
+
 const Header = () => {
+  const { cartCount, } = useCart();
   const [search, setSearch] = useState<string>("");
   const [openCart, setOpenCart] = useState<boolean>(false);
-  const [cartCount] = useState<number>(0);
-  const [cartItems, setCartItems] = useState<Product[]>([]);
-  // const [searchItem, setSearchItem] = useState<string>("");
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [leave, setLeave] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState<boolean>(true);
-  const [showInfo, setShowInfo] = useState<boolean>(false)
+  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   const token = localStorage.getItem("token");
 
@@ -55,7 +54,6 @@ const Header = () => {
     fetchCurrentUser();
   }, []);
 
-  
   const headerStuff = {
     logo: "/download.jpg",
     title: "ARNOLD-SELLERS",
@@ -130,7 +128,7 @@ const Header = () => {
             {showInfo ? (
               <ChevronUp className="text-white" size={15} />
             ) : (
-              <ChevronDown className="text-white text-sm" size={15}/>
+              <ChevronDown className="text-white text-sm" size={15} />
             )}
           </button>
         </div>
@@ -202,18 +200,10 @@ const Header = () => {
           </div>
         </div>
       </div>
-
-      <SideCart
-        openCart={openCart}
-        setOpenCart={setOpenCart}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-      />
+      // Header.tsx
+      <SideCart openCart={openCart} setOpenCart={setOpenCart} />
       <Logout leave={leave} setLeave={setLeave} />
-
-    
       <ProfileStat showInfo={showInfo} setShowInfo={setShowInfo} />
-       
     </>
   );
 };

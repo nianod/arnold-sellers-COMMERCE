@@ -1,29 +1,26 @@
 import { FaTrash } from "react-icons/fa";
-import type { Product } from "../Types/Product";
 import { useNavigate } from "react-router-dom";
-
-
+import { useCart } from "../CartContext";  
+ 
 type SideCartProps = {
   openCart: boolean;
   setOpenCart: React.Dispatch<React.SetStateAction<boolean>>;
-  cartItems: Product[];
-  setCartItems: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
-// const [drop] = useSound("/mixkit-typewriter-soft-click-1125.wav")
-
-const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart, cartItems, setCartItems  }) => {
+const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
+ 
+  const { cartItems, setCartItems } = useCart();
+  
   const removeFromCart = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item._id !== id));
+    setCartItems((prev: any) => prev.filter((item: any) => item._id !== id));
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const purchase = () => {
-    navigate('/entirecart')
-  }
+    navigate('/entirecart');
+  };
 
- 
   return (
     <div>
       {openCart && (
@@ -51,41 +48,35 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart, cartItems, s
                   Your cart is empty
                 </p>
               ) : (
-                cartItems.map((item) => (
-                  <div className=""
-                    key={item._id}
-                  >
-                  <div
-                   
-                    className="flex items-center justify-between gap-2 bg-white p-2 rounded-lg shadow mt-4"
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-16 h-16 object-cover rounded-lg"
-                    />
-                    <div className="flex-1 px-2">
-                      <p className="font-medium text-gray-800">{item.name}</p>
-                      <span className="text-green-700 font-semibold">
-                        ${item.price}
-                      </span>
+                cartItems.map((item: any) => (
+                  <div key={item._id} className="mb-4">
+                    <div className="flex items-center justify-between gap-2 bg-white p-2 rounded-lg shadow">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                      <div className="flex-1 px-2">
+                        <p className="font-medium text-gray-800">{item.name}</p>
+                        <span className="text-green-700 font-semibold">
+                          ${item.price}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(item._id)}
+                        title="Remove from cart"
+                        className="text-red-600 hover:text-red-800 cursor-pointer p-1"
+                      >
+                        <FaTrash />
+                      </button>
                     </div>
-                    <button
-                      onClick={() => {removeFromCart(item._id); }}
-                      title="Remove from cart"
-                      className="text-red-600 hover:text-red-800 cursor-pointer"
+                    <button 
+                      className="bg-blue-600 text-white cursor-pointer px-3 w-full mt-2 py-1.5 rounded hover:bg-blue-700 transition-colors"  // ✅ Fixed typos
+                      onClick={purchase}
                     >
-                      <FaTrash />
+                      Purchase
                     </button>
                   </div>
-                  <button 
-                    className="bg cursor-ponter px-3 w-full mt-2 cursor-pointer py-1.5"
-                    onClick={purchase}
-                  >
-                    Purchase
-                  </button>
-                  </div>
-                  
                 ))
               )}
             </div>
