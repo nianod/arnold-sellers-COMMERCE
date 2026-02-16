@@ -11,7 +11,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useCart } from "../../CartContext";
 
 const Header = () => {
-  const { cartCount, setCartCount, cartItems, setCartItems } = useCart();
+  const { cartCount, } = useCart();
   const [search, setSearch] = useState<string>("");
   const [openCart, setOpenCart] = useState<boolean>(false);
 
