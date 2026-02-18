@@ -37,7 +37,7 @@ const Home = () => {
   const [play] = useSound("/mixkit-mouse-click-close-1113.wav");
 
   return (
-    <div className="flex items-center justify-center flex-col overflow-x-hidden mt-16">
+    <div className="flex items-center justify-center flex-col overflow-x-hidden">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-9 px-3 py-5">
         {filteredItems.map((product) => (
           <div key={product._id}>
