@@ -8,12 +8,15 @@ type SideCartProps = {
 };
 
 const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
-  const { cartItems, setCartItems } = useCart();
+  const { cartItems, setCartItems, cartCount } = useCart();
 
   const removeFromCart = (id: string) => {
     setCartItems((prev: any) => prev.filter((item: any) => item._id !== id));
   };
 
+  const totalPrice = cartItems.reduce((total: number, item:any ) => {
+    return total + item.price
+  }, 0)
   
    
   return (
@@ -71,8 +74,8 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
                   ))}
                   <div>
                     <p>
-                      <p className="flex justify-between">Total Items: <span>5</span></p>
-                      <p className="flex justify-between">Total Price: <span>$ 200 </span></p>
+                      <p className="flex justify-between">Total Items: <span>{cartCount}</span></p>
+                      <p className="flex justify-between">Total Price: <span>$ {totalPrice} </span></p>
                     </p>
                   <Link
                     to="/checkout"
@@ -93,3 +96,6 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
 };
 
 export default SideCart;
+
+
+
