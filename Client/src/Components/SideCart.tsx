@@ -1,29 +1,21 @@
 import { FaTrash } from "react-icons/fa";
-import { useNavigate, Link } from "react-router-dom";
-import { useCart } from "../CartContext";  
- 
- 
- 
+import {  Link } from "react-router-dom";
+import { useCart } from "../CartContext";
+
 type SideCartProps = {
   openCart: boolean;
   setOpenCart: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
- 
   const { cartItems, setCartItems } = useCart();
- 
+
   const removeFromCart = (id: string) => {
     setCartItems((prev: any) => prev.filter((item: any) => item._id !== id));
   };
 
-  const navigate = useNavigate();
-
-  const purchase = () => {
-    setOpenCart(false)
-    navigate('/entirecart');
-  };
-
+  
+   
   return (
     <div>
       {openCart && (
@@ -51,48 +43,45 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
                   Your cart is empty
                 </p>
               ) : (
-                cartItems.map((item: any) => (
-                  <div key={item._id} className="mb-4">
-                    <div className="flex items-center justify-between gap-2 bg-white p-2 rounded-lg shadow">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-16 h-16 object-cover rounded-lg"
-                      />
-                      <div className="flex-1 px-2">
-                        <p className="font-medium text-gray-800">{item.name}</p>
-                        <span className="text-green-700 font-semibold">
-                          ${item.price}
-                        </span>
+                <>
+                  {cartItems.map((item: any) => (
+                    <div key={item._id} className="mb-4">
+                      <div className="flex items-center justify-between gap-2 bg-white p-2 rounded-lg shadow">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-16 h-16 object-cover rounded-lg"
+                        />
+                        <div className="flex-1 px-2">
+                          <p className="font-medium text-gray-800">
+                            {item.name}
+                          </p>
+                          <span className="text-green-700 font-semibold">
+                            ${item.price}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => removeFromCart(item._id)}
+                          className="text-red-600 hover:text-red-800 cursor-pointer p-1"
+                        >
+                          <FaTrash />
+                        </button>
                       </div>
-                      <button
-                        onClick={() => removeFromCart(item._id)}
-                        title="Remove from cart"
-                        className="text-red-600 hover:text-red-800 cursor-pointer p-1"
-                      >
-                        <FaTrash />
-                      </button>
                     </div>
-                    <button 
-                      className="bg-blue-600 text-white cursor-pointer px-3 w-full mt-2 py-1.5 rounded hover:bg-blue-700 transition-colors"   
-                      onClick={purchase}
-                    >
-                      Purchase
-                    </button>
-                  </div>
-                ))
+                  ))}
+
+                  {/* SINGLE Checkout Button */}
+                  <Link
+                    to="/checkout"
+                    className="block text-center bg-blue-600 text-white px-3 w-full mt-4 py-2 rounded hover:bg-blue-700"
+                    onClick={() => setOpenCart(false)}
+                  >
+                    Proceed to checkout
+                  </Link>
+                </>
               )}
             </div>
           </div>
-           {cartItems.length > 0 && (
-              <Link 
-                to="/checkout" 
-                className="block text-center bg-blue-600 text-white px-3 w-full mt-4 py-2 rounded hover:bg-blue-700"
-                onClick={() => setOpenCart(false)}
-              >
-                Proceed to checkout
-              </Link>
-            )}
         </div>
       )}
     </div>
