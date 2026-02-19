@@ -23,8 +23,6 @@ const AllProducts = () => {
     fetchProducts();
   }, []);
 
-  
-
   const filteredItems = (Array.isArray(allProducts) ? allProducts : []).filter(
     (product) =>
       (product.name ?? "")
@@ -32,7 +30,8 @@ const AllProducts = () => {
         .includes((searchItem ?? "").toLowerCase()),
   );
 
-  const [play] = useSound("/mixkit-mouse-click-close-1113.wav");
+  const [play] = useSound("/mixkit-mouse-click-close-1113.wav")
+  
   return (
     <div className="p-3">
         <div className="w-full max-w-7xl">
@@ -52,7 +51,7 @@ const AllProducts = () => {
               </span>{" "}
               <br />
               <button
-                className="bg-[#14144d] rounded p-2 px-2 w-full text-white font-bold cursor-pointer hover:bg-[#2f2f4f] "
+                className="bg-[#14144d] rounded p-2 px-2 w-full text-white font-bold cursor-pointer hover:bg-[#2f2f4f]"
                 onClick={() => {
                   setCartCount((prev) => prev + 1);
                   setCartItems((prev) => [...prev, product]);
