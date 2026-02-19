@@ -69,8 +69,11 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
                       </div>
                     </div>
                   ))}
-
-                  {/* SINGLE Checkout Button */}
+                  <div>
+                    <p>
+                      <p className="flex justify-between">Total Items: <span>5</span></p>
+                      <p className="flex justify-between">Total Price: <span>$ 200 </span></p>
+                    </p>
                   <Link
                     to="/checkout"
                     className="block text-center bg-blue-600 text-white px-3 w-full mt-4 py-2 rounded hover:bg-blue-700"
@@ -78,6 +81,7 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
                   >
                     Proceed to checkout
                   </Link>
+                  </div>
                 </>
               )}
             </div>
