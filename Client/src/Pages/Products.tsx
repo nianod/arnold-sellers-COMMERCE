@@ -5,7 +5,7 @@ import useSound from "use-sound";
 import { useCart } from "../CartContext";
 
 const AllProducts = () => {
-    const { setCartCount, cartCount, searchItem, setCartItems } = useCart();
+    const { setCartCount, searchItem, setCartItems } = useCart();
     const [allProducts, setAllProducts] = useState<Product[]>([])
     
       const fetchProducts = async () => {
