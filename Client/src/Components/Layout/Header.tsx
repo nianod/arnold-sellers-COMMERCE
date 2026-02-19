@@ -200,7 +200,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      // Header.tsx
+       
       <SideCart openCart={openCart} setOpenCart={setOpenCart} />
       <Logout leave={leave} setLeave={setLeave} />
       <ProfileStat showInfo={showInfo} setShowInfo={setShowInfo} />
