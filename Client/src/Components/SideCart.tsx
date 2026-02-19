@@ -1,6 +1,8 @@
 import { FaTrash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCart } from "../CartContext";  
+ 
+ 
  
 type SideCartProps = {
   openCart: boolean;
@@ -10,7 +12,7 @@ type SideCartProps = {
 const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
  
   const { cartItems, setCartItems } = useCart();
-  
+ 
   const removeFromCart = (id: string) => {
     setCartItems((prev: any) => prev.filter((item: any) => item._id !== id));
   };
@@ -18,6 +20,7 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
   const navigate = useNavigate();
 
   const purchase = () => {
+    setOpenCart(false)
     navigate('/entirecart');
   };
 
@@ -71,7 +74,7 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
                       </button>
                     </div>
                     <button 
-                      className="bg-blue-600 text-white cursor-pointer px-3 w-full mt-2 py-1.5 rounded hover:bg-blue-700 transition-colors"  // ✅ Fixed typos
+                      className="bg-blue-600 text-white cursor-pointer px-3 w-full mt-2 py-1.5 rounded hover:bg-blue-700 transition-colors"   
                       onClick={purchase}
                     >
                       Purchase
@@ -81,6 +84,15 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
               )}
             </div>
           </div>
+           {cartItems.length > 0 && (
+              <Link 
+                to="/checkout" 
+                className="block text-center bg-blue-600 text-white px-3 w-full mt-4 py-2 rounded hover:bg-blue-700"
+                onClick={() => setOpenCart(false)}
+              >
+                Proceed to checkout
+              </Link>
+            )}
         </div>
       )}
     </div>

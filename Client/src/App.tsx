@@ -17,7 +17,7 @@ import Credentials from "./Pages/Auth/Credentials";
 import Profile from "./Pages/Profile";
 import Otp from "./Pages/Auth/Otp";
 import { CartProvider } from "./CartContext";
- 
+import AllProducts from "./Pages/Products";
   
 const App = () => {
 
@@ -29,7 +29,7 @@ const App = () => {
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-             
+            <Route path="/products" element={<AllProducts />} />
           </Route>
         </Route>
 
