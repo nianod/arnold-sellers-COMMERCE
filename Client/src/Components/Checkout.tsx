@@ -3,9 +3,19 @@ import { useCart } from "../CartContext";
 const Checkout = () => {
   const { cartItems } = useCart();
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
-  const tax = subtotal * 0.1;  
-  const total = subtotal + tax;
+  const subtotal = cartItems.reduce((sum, item) => {
+    const price = Number(item.price) || 0;
+    const quantity = Number(item.quantity) || 1;
+    return sum + price * quantity;
+  }, 0);
+
+  const shippingCost = 2;
+  const total = subtotal + shippingCost;
+
+  const handlePayment = () => {
+    alert('Hold on, No rush');
+   
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -24,7 +34,7 @@ const Checkout = () => {
         <h1 className="text-3xl font-bold mb-6">Checkout</h1>
         
         <div className="grid md:grid-cols-3 gap-6">
-          {/* Cart Items Section */}
+   
           <div className="md:col-span-2">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Order Items</h2>
@@ -40,7 +50,7 @@ const Checkout = () => {
                       <p className="font-semibold">{item.name}</p>
                       <p className="text-gray-600 text-sm">Quantity: {item.quantity || 1}</p>
                       <p className="text-amber-600 font-bold">
-                        $ {(item.price * (item.quantity || 1)).toFixed(2)}
+                        ${(Number(item.price) * (Number(item.quantity) || 1)).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -48,8 +58,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-
-          {/* Order Summary Section */}
+ 
           <div className="md:col-span-1">
             <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
@@ -60,8 +69,8 @@ const Checkout = () => {
                   <span className="font-semibold">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Tax (10%)</span>
-                  <span className="font-semibold">${tax.toFixed(2)}</span>
+                  <span className="text-gray-600">Shipping</span>
+                  <span className="font-semibold">${shippingCost.toFixed(2)}</span>
                 </div>
                 <div className="border-t pt-2 mt-2">
                   <div className="flex justify-between font-bold text-lg">
@@ -71,7 +80,10 @@ const Checkout = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors">
+              <button 
+                onClick={handlePayment} 
+                className="w-full cursor-pointer bg-amber-600 text-white py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+              >
                 Proceed to Payment
               </button>
             </div>
