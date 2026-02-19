@@ -96,3 +96,6 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
 };
 
 export default SideCart;
+
+
+
