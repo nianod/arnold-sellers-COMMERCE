@@ -73,10 +73,10 @@ const SideCart: React.FC<SideCartProps> = ({ openCart, setOpenCart }) => {
                     </div>
                   ))}
                   <div>
-                    <p>
+                    <div>
                       <p className="flex justify-between">Total Items: <span>{cartCount}</span></p>
                       <p className="flex justify-between">Total Price: <span>$ {totalPrice} </span></p>
-                    </p>
+                    </div>
                   <Link
                     to="/checkout"
                     className="block text-center bg-blue-600 text-white px-3 w-full mt-4 py-2 rounded hover:bg-blue-700"
