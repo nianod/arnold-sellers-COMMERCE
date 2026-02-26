@@ -15,3 +15,4 @@ export const authLimiter = rateLimit({
     skip: (req) => !req.originalUrl.includes('/api/auth')
     
 })
+
