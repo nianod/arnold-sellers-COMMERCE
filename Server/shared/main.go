@@ -33,7 +33,7 @@ func seedAdmin() error {
 	adminPassword := os.Getenv("ADMIN_PASSWORD")
 
 	if mongoURL == "" || adminID == "" || adminPassword == "" {
-		return fmt.Errorf("missing required env vars: MONGO_URL, ADMIN_ID, ADMIN_PASSWORD")
+		return fmt.Errorf("missing required env vars")
 	}
 
 	 
