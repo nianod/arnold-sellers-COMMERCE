@@ -6,6 +6,7 @@ const AdminAuth = () => {
   const [passcode, setPasscode] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
   const [error, setError] = useState<string>("")
+  const [adminId, setAdminId] = useState<string>('')
 
   const navigate = useNavigate()
 
@@ -16,18 +17,25 @@ const AdminAuth = () => {
     setSuccess("")
 
     const ADMIN_PASSCODE: string = "12345"
+    const ADMIN_ID: string = "commerce"
 
     setTimeout(() => {
+        if (adminId !== ADMIN_ID) {
+        setError('Wrong Admin id')
+        setLoading(false)
+        return
+      }
       if (passcode !== ADMIN_PASSCODE) {
         setError("Unknown Passcode")
         setLoading(false)
         return;
       }
+
       setSuccess("Verified, Redirecting to Admin Dashboard...")
       setLoading(false)
       navigate("/admin/dashboard")
 
-    }, 1000);
+    }, 1000);  
   };
 
   return (
@@ -39,10 +47,11 @@ const AdminAuth = () => {
           <div>
           <label className="font-bold block mt-2">Admin Id:</label>
           <input
-            type="password"
-            value={passcode}
-            onChange={(e) => setPasscode(e.target.value)}
+            type="text"
+            value={adminId}
+            onChange={(e) => setAdminId(e.target.value)}
             className="border border-gray-500 p-2 rounded outline-blue-700"
+            required
           />
           <label className="font-bold mt-2 block">Passcode:</label>
            <input
@@ -50,6 +59,7 @@ const AdminAuth = () => {
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
             className="border border-gray-500 p-2 rounded outline-blue-700"
+            required
           />
           </div>
 
