@@ -43,8 +43,8 @@ To prevent abuse and brute-force attacks, **rate limiting is enforced at critica
 - Automatically blocks excessive attempts
 
 ```text
-Max OTP verification attempts: 5
-Time window: 10 minutes
+Max OTP verification attempts: 2
+Time window: 5 minutes
 ```
 
 ### 👤 User Management
@@ -87,6 +87,7 @@ Time window: 10 minutes
 - JWT Authentication
 - Crypto (OTP hashing)
 - nodemailer of otp sendings
+- Docker support
 
 ---
 
@@ -110,6 +111,85 @@ Time window: 10 minutes
 - Role-based authorization middleware
 
 ---
+
+# 🚀 Project Setup
+
+This project can be run in two ways:
+
+- 🟢 Traditional Node.js setup
+- 🐳 Docker setup (no local npm install required)
+
+---
+
+# 🟢 Option 1: Run Using Node.js (Traditional Way)
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/nianod/arnold-sellers-COMMERCE.git
+cd arnold-sellers-COMMERCE
+
+#navigate to Client side
+cd Client
+
+#install Dependacnies
+npm install
+
+#start the development server
+npm run dev
+
+#The server should be running at:
+http://localhost:5173
+
+#navigate to server side
+cd Server
+
+#install Dependacnies
+npm install
+
+#start the development server
+npm run dev
+
+#The server should be running at:
+http://localhost:8000
+```
+
+## 🐳 Option 2: Run Using Docker (No npm install Needed)
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/nianod/arnold-sellers-COMMERCE.git
+cd arnold-sellers-COMMERCE
+
+#navigate to Client side
+cd Client
+
+#install Dependacnies
+npm install
+
+#start the development server
+npm run dev
+
+#The server should be running at:
+http://localhost:5173
+
+| SET UP THE SERVER |
+
+# Build the docker image
+docker build -t esellers .
+
+#Run the container
+docker run -p 8000:8000 esellers
+
+#The server should be running at:
+http://localhost:8000
+
+GO LIVE
+```
+
+
+
 
 ## 🤝 Contributing
 
