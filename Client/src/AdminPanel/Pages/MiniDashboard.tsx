@@ -1,4 +1,4 @@
-import type { Product } from "../../src/Types/Product";
+import type { Product } from "../../Types/Product";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaPen, FaTrash, FaRoad, FaPlus } from "react-icons/fa";
