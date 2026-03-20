@@ -16,8 +16,9 @@ const AdminAuth = () => {
     setError("")
     setSuccess("")
 
-    const ADMIN_PASSCODE: string = "12345"
     const ADMIN_ID: string = "commerce"
+    const ADMIN_PASSCODE: string = "12345"
+ 
 
     setTimeout(() => {
         if (adminId !== ADMIN_ID) {
