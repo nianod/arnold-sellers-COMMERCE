@@ -19,18 +19,21 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const API = import.meta.env.VITE_HEROKU_URL
+        const token = localStorage.getItem("token")
+        console.log('token...', token)
         const { data } = await axios.get(
-          "http://localhost:8000/api/users/users",
+          `${API}/api/users/users`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        setUsers(data.users);
+        
+        setUsers(data.users)
       } catch (err: any) {
         setError(err.response?.data?.message || "Failed to fetch users");
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchUsers();
   }, []);

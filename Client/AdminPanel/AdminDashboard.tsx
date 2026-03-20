@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaHome, FaUser, FaInbox, FaShoppingCart, FaLayerGroup, FaBox, FaCog, FaSignOutAlt } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
@@ -18,6 +19,9 @@ const menuItems: MenuItem[] = [
 ];
 
 const AdminDashboard = () => {
+
+  const [activeTab, setActiveTab] = useState('minidashboard')
+
   return (
     <>
       <div className="flex">
@@ -29,7 +33,10 @@ const AdminDashboard = () => {
               <Link
                 key={index}
                 to={menu.to}
-                className="p-[8px] flex items-center gap-2 rounded hover:bg-gray-800 hover:text-blue-400 transition"
+                onClick={() => setActiveTab(menu.to)}
+                className={`p-[8px] flex items-center gap-2 rounded hover:bg-green-800 hover:text-green-400 transition ${
+                  activeTab === menu.to ? "bg-green-600" : ""
+                }`}
               >
                 {menu.icon} {menu.label}
               </Link>
