@@ -19,46 +19,46 @@ const menuItems: MenuItem[] = [
 ];
 
 const AdminDashboard = () => {
-
   const [activeTab, setActiveTab] = useState('minidashboard')
 
   return (
-    <>
-      <div className="flex">
-        <div className="bg-black text-white w-80 min-h-screen p-3">
+    <div className="flex min-h-screen">
+       
+      <div className="bg-black text-white w-64 min-h-screen sticky top-0 h-screen overflow-y-auto flex-shrink-0">
+        <div className="p-4">
           <h1 className="font-bold text-2xl mb-6">Admin Dashboard</h1>
           <span className="font-semibold block mb-3 text-blue-300">Menu</span>
-          <div className="flex flex-col gap-2">
-            {menuItems.map((menu, index) => (
-              <Link
-                key={index}
-                to={menu.to}
-                onClick={() => setActiveTab(menu.to)}
-                className={`p-[8px] flex items-center gap-2 rounded hover:bg-green-800 hover:text-green-400 transition ${
-                  activeTab === menu.to ? "bg-green-600" : ""
-                }`}
-              >
-                {menu.icon} {menu.label}
-              </Link>
-            ))}
-            <div className="mt-24">
-              <Link to={'settings'} className="cursor-pointer flex items-center gap-2 p-2 rounded hover:bg-gray-800 hover:text-blue-400 transition w-full">
-                <FaCog />
-                Settings
-              </Link>
-              <Link to={'manage'} className="cursor-pointer flex items-center gap-2 p-2 rounded hover:bg-gray-800 hover:text-blue-400 transition w-full">
-                <FaSignOutAlt />
-                Log Out
-              </Link>
-            </div>
+
+          {menuItems.map((menu, index) => (
+            <Link
+              key={index}
+              to={menu.to}
+              onClick={() => setActiveTab(menu.to)}
+              className={`p-2 flex items-center gap-2 rounded hover:bg-green-800 hover:text-green-400 transition ${
+                activeTab === menu.to ? "bg-green-600" : ""
+              }`}
+            >
+              {menu.icon} {menu.label}
+            </Link>
+          ))}
+
+          <div className="mt-24">
+            <Link to="settings" className="flex items-center gap-2 p-2 rounded hover:bg-gray-800 hover:text-blue-400 transition">
+              <FaCog /> Settings
+            </Link>
+            <Link to="manage" className="flex items-center gap-2 p-2 rounded hover:bg-gray-800 hover:text-blue-400 transition">
+              <FaSignOutAlt /> Log Out
+            </Link>
           </div>
         </div>
-        <div>
-          <Outlet />
-        </div>
       </div>
-    </>
-  );
-};
+
+ 
+      <div className="flex-1 bg-green-700 p-6">
+        <Outlet />
+      </div>
+    </div>
+  )
+}
 
 export default AdminDashboard;
