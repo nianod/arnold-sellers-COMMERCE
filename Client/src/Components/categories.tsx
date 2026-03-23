@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 const Categories = () => {
-    const [activeTab, setActiveTab] = useState('All')
+    const [activeTab, setActiveTab] = useState('0')
 
     const tabs = [
         { id: "0", label: "All"},
