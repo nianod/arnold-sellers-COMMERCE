@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config() 
+
 import express from 'express'
 import mongoose from 'mongoose';
  
@@ -26,6 +27,7 @@ app.use('/api/user', userRoutes)
 
 const PORT = process.env.PORT || 7000
 const MONGO = process.env.MONGO_URL
+ 
 
 app.post('/api/products', async (request, response) => {
     try {

@@ -14,7 +14,12 @@ const Signin = () => {
     setLoading(true);
     setError("");
    
-  
+    if(!email) {
+      setError('please provide an email')
+      setLoading(false)
+      return
+    }
+    
     try {
       const apiUrl = import.meta.env.VITE_HEROKU_URL
       const res =  await axios.post(`${apiUrl}/api/auth/check-user`, {
@@ -65,6 +70,7 @@ const Signin = () => {
                   Enter your email:
                 </label>
                 <input
+                 
                   type="text"
                   className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                   value={email}

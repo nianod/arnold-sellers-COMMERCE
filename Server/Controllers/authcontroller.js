@@ -61,7 +61,7 @@ export const registerUserAndRequestOTP = async (req, res) => {
     
     const otp = generateOTP()
     const hashedOtp = crypto
-      .createHash("sha256")
+      .createHash("sha256") 
       .update(otp)
       .digest("hex")
 

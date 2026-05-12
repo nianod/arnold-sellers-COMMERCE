@@ -1,8 +1,7 @@
-import nodemailer from 'nodemailer'
- 
+import nodemailer from "nodemailer";
+
 const sender = process.env.EMAIL_FROM;
 const createTransporter = () => {
-   
   const host = process.env.EMAIL_HOST;
   const port = process.env.EMAIL_PORT;
   const userEmail = process.env.EMAIL_USER;
@@ -10,14 +9,13 @@ const createTransporter = () => {
 
   return nodemailer.createTransport({
     host,
-    port: parseInt(port || '587'),
+    port: parseInt(port || "587"),
     secure: false,
     auth: { user: userEmail, pass: password },
-    tls: { rejectUnauthorized: false }
+    tls: { rejectUnauthorized: false },
   });
-}
+};
 
- 
 // Send OTP email
 export const sendOTPEmail = async (email, otp) => {
   try {
@@ -26,7 +24,7 @@ export const sendOTPEmail = async (email, otp) => {
     const mailOptions = {
       from: `"Your E-Commerce App" <${sender}>`,
       to: email,
-      subject: 'Your OTP Verification Code',
+      subject: "Your OTP Verification Code",
       html: `
         <!DOCTYPE html>
         <html>
@@ -158,40 +156,34 @@ This code will expire in 5 minutes.
 
 If you didn't request this code, please ignore this email.
 
-- Your E-Commerce App Team`, 
+- Your E-Commerce App Team`,
     };
 
     const info = await transporter.sendMail(mailOptions);
- 
-    
+
     return { success: true, messageId: info.messageId };
-    
   } catch (error) {
-    console.error(' Error sending email:', error);
-    
-     
-    if (error.code === 'EAUTH') {
-      console.error('Authentication failed.');
-    } else if (error.code === 'ESOCKET') {
-      console.error('Network error. Check your internet connection');
+    console.error(" Error sending email:", error);
+
+    if (error.code === "EAUTH") {
+      console.error("Authentication failed.");
+    } else if (error.code === "ESOCKET") {
+      console.error("Network error. Check your internet connection");
     }
-    
-    throw new Error('Try again later');
+
+    throw new Error("Try again later");
   }
 };
 
-
 //testin
- export const testEmailConfig = async () => {
+export const testEmailConfig = async () => {
   try {
     const transporter = createTransporter();
     await transporter.verify();
-    console.log(' Email configuration is valid');
+    console.log(" Email configuration is valid");
     return true;
   } catch (error) {
-    console.error(' Email configuration error:', error);
+    console.error(" Email configuration error:", error);
     return false;
   }
 };
- 
- 
